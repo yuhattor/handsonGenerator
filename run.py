@@ -7,10 +7,10 @@ TEMPLATE_PATH = "./template.html"
 OUTPUTP_PATH= "./output.html"
 TITLE = "ハンズオン"
 INNER_TEMPLATE = '''
-  #__TitleOfSlide__ 
-  <img src='__ScreenshotPath__' /> 
-  ---
-  '''
+#__TitleOfSlide__ 
+<img src='__ScreenshotPath__' /> 
+---
+'''
 
 # get file list string and create array
 def pathToList(path):
