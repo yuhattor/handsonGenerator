@@ -20,15 +20,21 @@ def pathToList(path):
   p = Path(".")
   return list(p.glob(path))
 
-
 def run():
-  markDownText = ""
-  fullSlide = open(TEMPLATE_PATH).read()
-  for i, screenshot in enumerate(pathToList(SCREENSHOTS_PATH)):
-    it = INNER_TEMPLATE
-    markDownText += it.replace("__ScreenshotPath__", screenshot.as_posix()).replace("__TitleOfSlide__"," %s ." % str(i+1))
-  result = fullSlide.replace("__Contents__", markDownText)
-  
+  fullContents = ""
+  templateSlide = open(TEMPLATE_PATH).read()
+  screenshots = sorted(pathToList(SCREENSHOTS_PATH))
+  for i, screenshot in enumerate(screenshots):
+    page = INNER_TEMPLATE
+    replaceList = {
+      "__ScreenshotPath__": screenshot.as_posix(),
+      "__TitleOfSlide__": " %s ." % str(i+1)
+    }
+    for key in replaceList:
+      page = page.replace(key, replaceList[key])
+    fullContents += page
+  slide = templateSlide.replace("__Contents__", fullContents)
   with open(OUTPUTP_PATH, 'w') as f:
-    f.write(result)
+    f.write(slide)
+
 run()
