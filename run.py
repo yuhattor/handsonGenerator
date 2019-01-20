@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-
 # hands on generator
 from pathlib import Path
 
 SCREENSHOTS_PATH= "./screenshots/*.png"
 TEMPLATE_PATH = "./template.html"
 OUTPUTP_PATH= "./output.html"
+TITLE = "ハンズオン"
 INNER_TEMPLATE = '''
-
   #__TitleOfSlide__ 
-
   <img src='__ScreenshotPath__' /> 
-
   ---
   '''
 
@@ -34,6 +31,7 @@ def run():
       page = page.replace(key, replaceList[key])
     fullContents += page
   slide = templateSlide.replace("__Contents__", fullContents)
+  slide = slide.replace("__Title__", TITLE)
   with open(OUTPUTP_PATH, 'w') as f:
     f.write(slide)
 
